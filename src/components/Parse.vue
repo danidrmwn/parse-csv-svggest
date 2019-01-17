@@ -1,6 +1,13 @@
 <template>
   <div class="parse">
-    <h1>Parse CSV to JSON</h1>
+    <div id="app">
+    <div id="flex-container">
+      <div id="converter">
+      <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
+      <h3>Packing Slip Converter</h3>
+      </div>
+    </div>
+    </div>
     <input 
       id="fileInput"
       type="file"
@@ -9,17 +16,8 @@
       @click='save'
       type='button'
       download >
-      Save
+      Convert & Download Package Slip
     </a>
-    <div class="body">
-      <div class="entry">
-        <textarea 
-          class="entry-result"
-          v-model='doc'
-          placeholder="Type here">
-        </textarea>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -46,6 +44,7 @@
             complete (results) {
               console.log('complete', results)
               that.doc = JSON.stringify(results.data, null, 2)
+              console.log(that.doc)
             },
             error (errors) {
               console.log('error', errors)
