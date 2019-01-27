@@ -4,7 +4,7 @@
     <div id="flex-container">
       <div id="converter">
       <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
-      <h3>Packing Slip Converter</h3>
+      <h4>Packing Slip Converter</h4>
       </div>
     </div>
     </div>
@@ -12,19 +12,21 @@
       id="fileInput"
       type="file"
       @change="upload">
+    <br>
     <a
+      id ="print"    
       @click='save'
       type='button'
       download >
-      Convert & Download Package Slip
+      Convert & Print Package Slip
     </a>
   </div>
 </template>
 
 <script>
   import Papa from 'papaparse'
-  import Blob from 'blob'
-  import FileSaver from 'file-saver'
+  // import Blob from 'blob'
+  // import FileSaver from 'file-saver'
 
   export default {
     name: 'parse',
@@ -52,14 +54,14 @@
           })
         }
         reader.readAsText(fileToLoad)
-      },
-      save () {
-        const blob = new Blob([this.parseJSONtoCSV()], { type: 'text/csv' })
-        FileSaver.saveAs(blob, 'test.csv')
-      },
-      parseJSONtoCSV () {
-        return Papa.unparse(this.doc)
       }
+      // save () {
+      //   const blob = new Blob([this.parseJSONtoCSV()], { type: 'text/csv' })
+      //   FileSaver.saveAs(blob, 'test.csv')
+      // },
+      // parseJSONtoCSV () {
+      //   return Papa.unparse(this.doc)
+      // }
     }
   }
 </script>
@@ -84,6 +86,15 @@
   .preview {
     width: 40%;
     text-align: left;
+  }
+
+  #print {
+    padding: 10px 20px;
+    margin-top: 20px;
+  }
+
+  input {
+    margin-top: 20px;
   }
 
 
