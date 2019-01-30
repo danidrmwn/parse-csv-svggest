@@ -23,19 +23,14 @@
         <div class="content">
             <p class="kepada">Kepada:</p>
             <p>{{data.name}}</p>
-            <p>Jl. H. Munajat 260D/126C RT06/06, Kebon Gedang, Kiaracondong, Bandung 40274</p>
-            <p>Kec. Batununggal, Kota Bandung</p>
-            <p>Telp. +6285793710841</p>
-            <br>
-            <p class="order">No. Order #0309389 (26/12/1990)</p>
-            <p>1x Wallaby, 2x Deerwaves, 3x Fox</p>
-            <p>NOTES: Wallaby item, deerwaves maroon & item, fox ochre + black + maroon</p>
-            <br>
-            <p>JNE - REG</p>
-            <br>
+            <p>{{data.address}}, {{data.district}}, {{data.city}}</p>
+            <p>Telp. {{data.phone}}</p>
+            <p class="order">No. Order #{{data.order_id}}</p>
+            <p>{{data.variation}}</p>
+            <p>NOTES: {{data.Warna}}</p>
+            <p class="kurir">{{data.courier}}</p>
             <p class="pengirim">PENGIRIM:<br>Svggest | 087746239603</p>
             <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
-
         </div>
     </div>
   </div>
@@ -107,6 +102,7 @@
   }
 
   .paper {
+        text-align: left;
         width: 298px;
         height: 198px;
         background: white;
@@ -117,8 +113,9 @@
   .content {
         font-size: 9px;
         font-family: 'Roboto', sans-serif;
-        padding: 5px 10px;
+        padding: 10px 10px;
         letter-spacing: 0.5px;
+        line-height: 1.6;
     }
     
   p {
@@ -138,7 +135,11 @@
         left: 95px;
     }
     
-    .order, .kepada {
+    .order, .kepada, .kurir {
         font-weight: bold;
+    }
+
+    .parse {
+      background: #ddd;
     }
 </style>
