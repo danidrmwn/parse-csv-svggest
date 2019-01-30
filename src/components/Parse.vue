@@ -4,7 +4,7 @@
     <div id="flex-container">
       <div id="converter">
       <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
-      <h4>Packing Slip Converter</h4>
+      <h3>Packing Slip Converter</h3>
       </div>
     </div>
     </div>
@@ -12,21 +12,39 @@
       id="fileInput"
       type="file"
       @change="upload">
-    <br>
     <a
-      id ="print"    
       @click='save'
       type='button'
       download >
-      Convert & Print Package Slip
+      Convert & Download Package Slip
     </a>
+    <!-- {{doc}} -->
+    <div class="paper" v-for="(data, idx) in doc" :key="idx">
+        <div class="content">
+            <p class="kepada">Kepada:</p>
+            <p>{{data.name}}</p>
+            <p>Jl. H. Munajat 260D/126C RT06/06, Kebon Gedang, Kiaracondong, Bandung 40274</p>
+            <p>Kec. Batununggal, Kota Bandung</p>
+            <p>Telp. +6285793710841</p>
+            <br>
+            <p class="order">No. Order #0309389 (26/12/1990)</p>
+            <p>1x Wallaby, 2x Deerwaves, 3x Fox</p>
+            <p>NOTES: Wallaby item, deerwaves maroon & item, fox ochre + black + maroon</p>
+            <br>
+            <p>JNE - REG</p>
+            <br>
+            <p class="pengirim">PENGIRIM:<br>Svggest | 087746239603</p>
+            <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
+
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
   import Papa from 'papaparse'
-  // import Blob from 'blob'
-  // import FileSaver from 'file-saver'
+  import Blob from 'blob'
+  import FileSaver from 'file-saver'
 
   export default {
     name: 'parse',
@@ -45,7 +63,7 @@
             header: true,
             complete (results) {
               console.log('complete', results)
-              that.doc = JSON.stringify(results.data, null, 2)
+              that.doc = results.data
               console.log(that.doc)
             },
             error (errors) {
@@ -54,14 +72,14 @@
           })
         }
         reader.readAsText(fileToLoad)
+      },
+      save () {
+        const blob = new Blob([this.parseJSONtoCSV()], { type: 'text/csv' })
+        FileSaver.saveAs(blob, 'test.csv')
+      },
+      parseJSONtoCSV () {
+        return Papa.unparse(this.doc)
       }
-      // save () {
-      //   const blob = new Blob([this.parseJSONtoCSV()], { type: 'text/csv' })
-      //   FileSaver.saveAs(blob, 'test.csv')
-      // },
-      // parseJSONtoCSV () {
-      //   return Papa.unparse(this.doc)
-      // }
     }
   }
 </script>
@@ -88,14 +106,39 @@
     text-align: left;
   }
 
-  #print {
-    padding: 10px 20px;
-    margin-top: 20px;
-  }
-
-  input {
-    margin-top: 20px;
-  }
-
-
+  .paper {
+        width: 298px;
+        height: 198px;
+        background: white;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    
+  .content {
+        font-size: 9px;
+        font-family: 'Roboto', sans-serif;
+        padding: 5px 10px;
+        letter-spacing: 0.5px;
+    }
+    
+  p {
+        margin: 0;
+        padding: 0;
+    }
+    
+  .pengirim {
+        display: inline-block;
+    }
+    
+  img {
+        display: inline-block;
+        width: 20%;
+        text-align: right;
+        position: relative;
+        left: 95px;
+    }
+    
+    .order, .kepada {
+        font-weight: bold;
+    }
 </style>
