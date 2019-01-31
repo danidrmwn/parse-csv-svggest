@@ -15,7 +15,7 @@
       @click='print'
       type='button'
       download >
-      Convert & Download Package Slip
+      PRINT!!!
     </a>
     </div>
     
@@ -113,18 +113,17 @@
 
   .paper {
         text-align: left;
-        width: 298px;
-        height: 198px;
+        width: 10.5cm;
+        height: 7cm;
         background: white;
         margin-bottom: 0.5cm;
-        margin-left: 30px;
         position: relative;
     }
     
   .content {
         font-size: 9px;
         font-family: 'Roboto', sans-serif;
-        padding: 10px 10px;
+        padding: 10px 20px;
         letter-spacing: 0.5px;
         line-height: 1.6;
     }
