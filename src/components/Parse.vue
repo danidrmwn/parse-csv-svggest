@@ -1,24 +1,26 @@
 <template>
   <div class="parse">
-    <div id="app">
+    <div class="main" id="app">
     <div id="flex-container">
       <div id="converter">
       <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
       <h3>Packing Slip Converter</h3>
       </div>
     </div>
-    </div>
     <input 
       id="fileInput"
       type="file"
       @change="upload">
     <a
-      @click='save'
+      @click='print'
       type='button'
       download >
       Convert & Download Package Slip
     </a>
+    </div>
+    
     <!-- {{doc}} -->
+    <div id="printarea">
     <div class="paper" v-for="(data, idx) in doc" :key="idx">
         <div class="content">
             <p class="kepada">Kepada:</p>
@@ -30,8 +32,9 @@
             <p>NOTES: {{data.Warna}}</p>
             <p class="kurir">{{data.courier}}</p>
             <p class="pengirim">PENGIRIM:<br>Svggest | 087746239603</p>
-            <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
+            <img class="logo-print" src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
         </div>
+    </div>
     </div>
   </div>
 </template>
@@ -49,6 +52,13 @@
       }
     },
     methods: {
+      print () {
+        var printContents = document.getElementById('printarea').innerHTML
+        var originalContents = document.body.innerHTML
+        document.body.innerHTML = printContents
+        window.print()
+        document.body.innerHTML = originalContents
+      },
       upload (e) {
         const that = this
         const fileToLoad = event.target.files[0]
@@ -106,8 +116,9 @@
         width: 298px;
         height: 198px;
         background: white;
-        margin-top: 30px;
+        margin-bottom: 0.5cm;
         margin-left: 30px;
+        position: relative;
     }
     
   .content {
@@ -127,19 +138,34 @@
         display: inline-block;
     }
     
-  img {
-        display: inline-block;
-        width: 20%;
-        text-align: right;
-        position: relative;
-        left: 95px;
-    }
-    
     .order, .kepada, .kurir {
         font-weight: bold;
     }
 
     .parse {
       background: #ddd;
+    }
+
+    .logo-print {
+      display: inline-block;
+      width: 20%;
+      position: absolute;
+      right: 20px;
+      bottom: 15px;
+    }
+
+    @media print {
+      .main {
+        display: none;
+      }
+
+      #printarea {
+        display: block;
+      }
+    }
+
+    @page {
+      size: auto;
+      margin: 0mm;
     }
 </style>
