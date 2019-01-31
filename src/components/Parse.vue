@@ -1,27 +1,33 @@
 <template>
   <div class="parse">
     <div class="main" id="app">
-    <div id="flex-container">
-      <div id="converter">
-      <img src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
-      <h3>Packing Slip Converter</h3>
-      </div>
+      <div id="flex-container">
+        <div id="converter">
+          <img class="main-logo" src="https://shop.svggest.co/wp-content/uploads/2018/06/png-logo-curve-300x132.png">
+          <h5>Packing Slip Converter</h5>
+        </div>
+        <div class="file-input">
+          <b-form-file @change="upload" v-model="file" :state="Boolean(file)" placeholder="Choose a file..."></b-form-file>
+        <hr>
+        </div>
+        <div class="print-button">
+          <b-button @click='print'>Print!!!</b-button>
+        </div>
     </div>
-    <input 
+    </div>
+    <!-- <input 
       id="fileInput"
       type="file"
-      @change="upload">
-    <a
+      @change="upload"> -->
+    <!-- <a
       @click='print'
       type='button'
       download >
       PRINT!!!
-    </a>
-    </div>
-    
-    <!-- {{doc}} -->
+    </a> -->
     <div id="printarea">
     <div class="paper" v-for="(data, idx) in doc" :key="idx">
+        <hr class="shadow-line">
         <div class="content">
             <p class="kepada">Kepada:</p>
             <p>{{data.name}}</p>
@@ -90,40 +96,80 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .body {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+<style>
+  #app {
+    margin-top: 0!important;
+    padding-top: 30px;
   }
 
-  .entry {
-    width: 40%;
+  .main-logo {
+    width: 10%;
   }
 
-  .entry-result {
-    width: 100%;
-    height: 50vh;
+  html, body {
+    background: #efefef;
   }
 
-  .preview {
-    width: 40%;
+  @font-face {
+    font-family: 'warlow-sans';
+    src: url(warlow-sans.otf);
+    font-style: normal;
+    font-weight: 100;
+  }
+
+  h5 {
+    font-family: warlow-sans;
+    margin: 20px 0px;
+    letter-spacing: 1px;
+  }
+
+  .file-input {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  #__BVID__3__BV_file_control_ {
     text-align: left;
   }
 
+  .print-button {
+    margin: 20px 0;
+    font-family: warlow-sans;
+  }
+
+  .btn-secondary {
+    letter-spacing: 2px;
+    background-color: #197519;
+    border-color: #197519;
+  }
+
+  .btn-secondary:hover {
+    background-color: #0f580f;
+    border-color: #0f580f;
+  }
+
+  hr {
+    border-color: #b1b1b1;
+  }
+  /* .body {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  } */
+
   .paper {
         text-align: left;
-        width: 10.5cm;
-        height: 7cm;
-        background: white;
-        margin-bottom: 0.5cm;
+        width: 15.75cm;
+        height: 10.5cm;
+        /* margin-bottom: 0.5cm; */
         position: relative;
+        background-color: white;
     }
     
   .content {
-        font-size: 9px;
-        font-family: 'Roboto', sans-serif;
-        padding: 10px 20px;
+        font-size: 16px;
+        font-family: warlow-sans;
+        padding: 10px 10px;
         letter-spacing: 0.5px;
         line-height: 1.6;
     }
@@ -135,36 +181,40 @@
     
   .pengirim {
         display: inline-block;
+        position: absolute;
+        bottom: 20px;
     }
     
-    .order, .kepada, .kurir {
+  .order, .kepada, .kurir {
         font-weight: bold;
     }
 
-    .parse {
-      background: #ddd;
-    }
-
-    .logo-print {
+  .logo-print {
       display: inline-block;
       width: 20%;
       position: absolute;
-      right: 20px;
-      bottom: 15px;
+      right: 30px;
+      bottom: 20px;
+    }
+  
+  .shadow-line {
+    padding: 0;
+    margin: 0;
+    border-color: #b0b0b0;
+  }
+
+  @media print {
+    .main, .shadow-line {
+      display: none;
     }
 
-    @media print {
-      .main {
-        display: none;
-      }
-
-      #printarea {
-        display: block;
-      }
+    #printarea {
+      display: block;
     }
+  }
 
-    @page {
-      size: auto;
-      margin: 0mm;
-    }
+  @page {
+    size: auto;
+    margin: 0mm;
+  }
 </style>
