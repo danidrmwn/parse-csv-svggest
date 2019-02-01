@@ -97,6 +97,14 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+  .printarea {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+  }
   #app {
     margin-top: 0!important;
     padding-top: 30px;
@@ -167,9 +175,9 @@
     }
     
   .content {
-        font-size: 16px;
+        font-size: 14px;
         font-family: warlow-sans;
-        padding: 10px 10px;
+        padding: 10px 30px;
         letter-spacing: 0.5px;
         line-height: 1.6;
     }
