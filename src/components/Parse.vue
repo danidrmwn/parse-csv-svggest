@@ -25,7 +25,7 @@
       download >
       PRINT!!!
     </a> -->
-    <div id="printarea">
+    <div class="printarea" id="printarea">
     <div class="paper" v-for="(data, idx) in doc" :key="idx">
         <hr class="shadow-line">
         <div class="content">
